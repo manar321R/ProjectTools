@@ -31,7 +31,27 @@ manage_data() {
 
 #refal
 show_statistics() {
+echo "========= Statistics ========"
+    echo "- Total number of entries:"
+    wc -l < "$DATA_FILE"
+
+    echo "- Unique products:"
+    cut -d',' -f2 "$DATA_FILE" | sort | uniq | wc -l
+
+    echo "- Unique stores:"
+    cut -d',' -f1 "$DATA_FILE" | sort | uniq | wc -l
+
+    echo "- Average price per product:"
+    cut -d',' -f2,3 "$DATA_FILE" | \
+    awk -F',' '{sum[$1]+=$2; count[$1]++} END {for (p in sum) print p ": $" sum[p]/count[p]}' | sort
+
+    echo "- Cheapest product entry:"
+    sort -t',' -k3 -n "$DATA_FILE" | head -1
+
+    echo "- Most expensive product entry:"
+    sort -t',' -k3 -n "$DATA_FILE" | tail -1
 }
+
 
 
 
