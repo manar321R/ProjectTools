@@ -1,0 +1,7 @@
+#StoreName, ProductName, Price
+Amazon, Keyboard, 120
+Noon, Keyboard, 110
+Jarir, Keyboard, 115
+Amazon, Mousa, 50
+Noon, Mousa, 45
+Jarir, Mousa, 47
