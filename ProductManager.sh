@@ -24,6 +24,40 @@ compare_prices() {
 
 #amareej
 manage_data() {
+while true; do
+        echo ""
+	echo "----------- Product / store Manager -------------"
+	echo "1.View all entries"
+	echo "2. add new entry "
+	echo "3. Delete entry "
+	echo "4. Back to mine menu"
+	read -p "Choose an option: " option
+
+	case $option in
+		1)
+		echo "Current Data: " 
+		cat "$DATA_FILE" 
+		;;
+		2)
+		read -p "Enter Store Name: " store
+		read -p "Enter Product Name: " product
+		read -p "Enter Price Name: " price
+		echo "$store,$product,$price" >> "$DATA_FILE"
+		echo "Enter added!"
+		;;
+		3) 
+		read -p "Enter Product Name to delete: " product
+		sed -i "/$product/d" "$DATA_FILE"
+		echo "Entries for $product deleted!"
+		;;
+		4)
+		break
+		;;
+		*) echo "Invalid option!" 
+		;;
+	esac
+done
+
 }
 
 
@@ -51,6 +85,16 @@ echo "========= Statistics ========"
     echo "- Most expensive product entry:"
     sort -t',' -k3 -n "$DATA_FILE" | tail -1
 }
+
+
+
+
+
+
+	
+}
+
+
 
 
 
