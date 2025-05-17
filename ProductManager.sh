@@ -1,5 +1,5 @@
 #!/bin/bash
-DATA_FILE="stores.txt"
+DATA_FILE="Stores.txt"
 
 
 #manar
@@ -92,7 +92,7 @@ echo "========= Statistics ========"
 
 
 	
-}
+
 
 
 

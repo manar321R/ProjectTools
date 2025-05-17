@@ -1,7 +1,6 @@
-#StoreName, ProductName, Price
-Amazon, Keyboard, 120
-Noon, Keyboard, 110
-Jarir, Keyboard, 115
-Amazon, Mousa, 50
-Noon, Mousa, 45
-Jarir, Mousa, 47
+Amazon,Keyboard,120
+Noon,Keyboard,110
+Jarir,Keyboard,115
+Amazon,Mouse,50
+Noon,Mouse,45
+Jarir,Mouse,47
