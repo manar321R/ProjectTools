@@ -24,40 +24,47 @@ compare_prices() {
 
 #amareej
 manage_data() {
-while true; do
-        echo ""
-	echo "----------- Product / store Manager -------------"
-	echo "1.View all entries"
-	echo "2. add new entry "
-	echo "3. Delete entry "
-	echo "4. Back to mine menu"
-	read -p "Choose an option: " option
+# Function to manage data
+  while true; do
+# Loop keeps running until user chooses to exit
+  echo ""
+  echo "==== Product/Store Manager ====" # Menu title
+  echo "1. View all entries" # Option to show all data
+  echo "2. Add new entry" # Option to add data
+  echo "3. Delete entry" # Option to delete data
+  echo "4. Back to main menu" # Go back to main menu
+  read -p "Choose an option: " option # Ask user for input
 
-	case $option in
-		1)
-		echo "Current Data: " 
-		cat "$DATA_FILE" 
-		;;
-		2)
-		read -p "Enter Store Name: " store
-		read -p "Enter Product Name: " product
-		read -p "Enter Price Name: " price
-		echo "$store,$product,$price" >> "$DATA_FILE"
-		echo "Enter added!"
-		;;
-		3) 
-		read -p "Enter Product Name to delete: " product
-		sed -i "/$product/d" "$DATA_FILE"
-		echo "Entries for $product deleted!"
-		;;
-		4)
-		break
-		;;
-		*) echo "Invalid option!" 
-		;;
-	esac
+  case $option in
+  1)
+# If user chooses 1, show the data
+  echo "Current Data:"
+  cat "$DATA_FILE"
+  ;;
+  2)
+# If user chooses 2, add new data
+  read -p "Enter Store Name: " store # Get store name
+  read -p "Enter Product Name: " product # Get product name
+  read -p "Enter Price: " price # Get price
+  echo "$store,$product,$price" >> "$DATA_FILE" # Save to file
+  echo "Entry added!" # Confirm added
+  ;;
+  3)
+# If user chooses 3, delete product
+  read -p "Enter Product Name to delete: " product # Get product name
+  sed -i "/$product/d" "$DATA_FILE" # Delete lines with product
+  echo "Entries for $product deleted!" # Confirm deleted
+  ;;
+  4)
+# If user chooses 4, exit the loop
+  break
+  ;;
+  *)
+# If wrong input, show error
+  echo "Invalid option!"
+  ;;
+  esac
 done
-
 }
 
 
