@@ -65,24 +65,32 @@ done
 
 #refal
 show_statistics() {
+# Print header for statistics
 echo "========= Statistics ========"
+# Print total number of entries
     echo "- Total number of entries:"
+# Count the number of lines in the data file    
     wc -l < "$DATA_FILE"
-
+# Print unique products 
     echo "- Unique products:"
+# Count unique users by extracting the second field, sorting, and removing duplicates 
     cut -d',' -f2 "$DATA_FILE" | sort | uniq | wc -l
-
+# Print unique stores
     echo "- Unique stores:"
+# Count unique stores by extracting the first field
     cut -d',' -f1 "$DATA_FILE" | sort | uniq | wc -l
-
+# Print average price per product 
     echo "- Average price per product:"
+# Calculate average price for each product using awk    
     cut -d',' -f2,3 "$DATA_FILE" | \
     awk -F',' '{sum[$1]+=$2; count[$1]++} END {for (p in sum) print p ": $" sum[p]/count[p]}' | sort
-
+# Print cheapest product entry
     echo "- Cheapest product entry:"
+# Sort by price and display the entry with the lowest price   
     sort -t',' -k3 -n "$DATA_FILE" | head -1
-
+# Print most expensive product entry
     echo "- Most expensive product entry:"
+# Sort by price in descending order and display the entry with the highest price    
     sort -t',' -k3 -n "$DATA_FILE" | tail -1
 }
 
