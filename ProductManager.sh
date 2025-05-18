@@ -4,18 +4,30 @@ DATA_FILE="Stores.txt"
 
 #manar
 compare_prices() {
+	#ask the user to enter the product name
 	echo "Enter the product name: "
+	#read the product name input and store it in the variable 'product'
 	read product
+	
+	#display the product name being searched
 	echo "Searching for: $product"
+	
+	#search for the product in the data file (case-insensitive)
+	#extract the third field (price), sort the prices in ascending order
+	#and get the lowest one
 	lowest=$(grep -i "$product" "$DATA_FILE" | awk -F',' '{print $3}' | sort -n | head -1)
 	
+	#if no product is found (lowest is empty), display a message and exit the function
 	if [ -z "$lowest" ]; then
 		echo "Product not found!"
 		return
 	fi
 
+	#display the lowest price found
 	echo "Lowest price: $lowest"
+	
 	echo "Available at:"
+	#show the store that offer the product at the lowest price
 	grep -i "$product" "$DATA_FILE" | awk -F',' -v low="$lowest" '$3 == low {print $1 " - " $2 " - $" $3 }'
 }
 
@@ -106,31 +118,30 @@ echo "========= Statistics ========"
 
 
 
-	
 
 
-
-
-
-
-
-
+#start an infinite loop to display the main menu continuously
 while true; do
 	echo ""
 	echo "------------- Product Price Comparator -------------"
+	
+	#display menu options to the user
 	echo "1. Compare product prices"
 	echo "2. Manage product/stores"
 	echo "3. View statistics"
 	echo "4. Exit"
+	
+	#ask the user to choose an option
 	echo "Choose an option: "
 	read choice
 
+	#handle the user choice using a csae statement
 	case $choice in
-		1) compare_prices ;;
-		2) manage_data ;;
-		3) show_statistics ;;
-		4) echo "Goodbye"; exit 0 ;;
-		*) echo "Invalid choice." ;;
+		1) compare_prices ;;	#call function to compare product prices
+		2) manage_data ;;	#call function to manage product/store data
+		3) show_statistics ;;	#call function to display statistics
+		4) echo "Goodbye"; exit 0 ;;	#exit option
+		*) echo "Invalid choice." ;;	#handle invalid input
 	esac
 done
 	
